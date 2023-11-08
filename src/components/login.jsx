@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from 'react-bootstrap';
 import '../styles/homePage.css';
 
-function about()  {
+function login()  {
     return (
         <>
         <Container className="header">
@@ -21,4 +21,4 @@ function about()  {
   crossorigin="anonymous"
 />
 
-export default about;
+export default login;

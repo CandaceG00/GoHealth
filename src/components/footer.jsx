@@ -1,15 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'react-bootstrap';
-import '../styles/homePage.css';
+import '../styles/footer.css';
 
-function about()  {
+
+function footer()  {
     return (
         <>
-        <Container className="header">
-            <h1>Welcome to <span className="title">GoHealth!</span></h1>
-            </Container>
-
-        <br></br>
+        <footer className="footer">
+        <p>&copy; 2023 Your Company. All rights reserved.</p>
+        </footer>
         </>
     );
 }
@@ -21,4 +19,4 @@ function about()  {
   crossorigin="anonymous"
 />
 
-export default about;
+export default footer;
