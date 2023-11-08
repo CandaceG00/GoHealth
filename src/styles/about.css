@@ -1,0 +1,44 @@
+.header {
+    padding-top: 50px;
+}
+
+.title {
+    font-weight: bold;
+    color: #39530c;
+}
+
+.about-section {
+    display: flex;
+}
+
+.mission-statement {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mission-statement h5 {
+    margin-bottom: 50px; /* Add margin to separate the text and button */
+  }
+
+  .about-button {
+    background-color: transparent;
+    color: #39530c;
+    border: 2px solid #39530c;
+    padding: 20px 40px;
+    cursor: pointer;
+    border-radius: 30px;
+    font-size: 20px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+.about-button:hover {
+    background-color: #39530c;
+    color: #fff;
+}
+
+.about-image img {
+    display: flex;
+    height: 500px;
+}
