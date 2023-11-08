@@ -1,33 +1,15 @@
-//const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-// Connect to Mongoose; Best practice, hide MongoDB URI in .env for security purposes;
-//mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/social-network-api')
-  //  .then(() => console.log('Mongoose connected'))
-    //.catch(err => console.log(err));
+// Connection URL to your MongoDB instance
+const dbURL = 'mongodb://localhost:27017/';
 
-//module.exports = mongoose.connection;
+mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true });
 
-const { MongoClient } = require('mongodb');
+const db = mongoose.connection;
 
-// Connection URI
-const uri = 'mongodb://localhost:27017';
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB');
+});
 
-// Database Name
-const dbName = 'yourDatabaseName';
-
-// Create a new MongoClient
-const client = new MongoClient(uri);
-
-// Connect to the MongoDB server
-client.connect()
-  .then(() => {
-    console.log('Connected to MongoDB');
-
-    // Your MongoDB code goes here
-
-    // Close the connection when done
-    client.close();
-  })
-  .catch(err => {
-    console.error('Error connecting to MongoDB:', err);
-  });
+module.exports = mongoose;
