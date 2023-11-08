@@ -2,7 +2,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/homePage.css';
 import { Container } from 'react-bootstrap';
 import coverImage from '../assets/Healthy_Recipe1.png';
-import '../styles/footer.css';
 
 
 function homeContent()  {

@@ -30,7 +30,7 @@ function App() {
   return (
       <>
       <Helmet>
-        <title>Candace Gostinski's Portfolio | {currentTab} </title>
+        <title>GoHealth - Recipes | {currentTab} </title>
       </Helmet>
       <Navbar
         currentTab={currentTab}
