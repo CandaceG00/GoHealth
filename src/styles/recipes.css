@@ -1,0 +1,11 @@
+.recipe-header {
+    padding-top: 50px;
+}
+
+.breakfast-heading {
+    padding-top: 50px;
+}
+
+.breakfast-container {
+    display: flex;
+}

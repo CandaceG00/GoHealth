@@ -29,6 +29,9 @@ function about()  {
             <   img src={AboutImage} alt="About Image" /> 
             </Container>
         </Container>
+
+        <br></br>
+        <br></br>
         </>
     );
 }

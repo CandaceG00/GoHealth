@@ -16,6 +16,10 @@ function homeContent()  {
             <img src={coverImage} alt="Cover Image" /> 
             
         </Container>
+
+        <br></br>
+        <br></br>
+
         </>
     );
 }
