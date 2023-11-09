@@ -10,3 +10,8 @@
 .breakfast-container {
     display: flex;
 }
+
+.saved-button {
+    background-color: #39530c !important;
+    color: #fff;
+  }

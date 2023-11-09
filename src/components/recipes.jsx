@@ -11,10 +11,18 @@ import '../styles/recipes.css';
 
 function RecipeCard({ title, ingredients }) {
   const [expanded, setExpanded] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
 
   const toggleExpand = () => {
     setExpanded(!expanded);
   };
+
+  const toggleSaved = () => {
+    setIsSaved(!isSaved);
+  };
+
+  const buttonLabel = isSaved ? 'Saved' : 'Favorite';
+  const buttonClass = isSaved ? 'saved-button' : ''; // Apply the class when saved
 
   const ingredientList = ingredients.map((ingredient, index) => (
     <p key={index}>{ingredient}</p>
@@ -50,7 +58,9 @@ function RecipeCard({ title, ingredients }) {
             Show less
           </Button>
         )}
-        <Button variant="primary">Favorite</Button>
+        <Button variant="primary" onClick={toggleSaved} className={buttonClass}>
+          {buttonLabel}
+        </Button>
       </Card.Body>
     </Card>
   );
