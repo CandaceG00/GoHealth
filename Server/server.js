@@ -2,9 +2,15 @@
 const express = require('express');
 const db = require('./config/connection');
 const routes = require('./routes');
+const { typeDefs, resolvers } = require('./Schema');
 
 const PORT = 3001;
 const app = express();
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
+
 
 // Middlewares
 app.use(express.urlencoded({ extended: true }));
