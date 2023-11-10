@@ -15,3 +15,5 @@ const typeDefs = `
         user(username: String!): User
         me: User
     }`
+
+module.exports = typeDefs;
