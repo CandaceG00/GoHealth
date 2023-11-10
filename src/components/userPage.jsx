@@ -7,7 +7,7 @@ import Sandwich from '../assets/chicken_avocado.png';
 import SteakSandwich from '../assets/steak_salad.png';
 import FishTacos from '../assets/fish_tacos.png';
 import ChickenVeggies from '../assets/chicken_veggies.png';
-import '../styles/recipes.css';
+import '../styles/userPage.css';
 
 function RecipeCard({ title, ingredients, onSave, onRemove, isSaved }) {
   const [expanded, setExpanded] = useState(false);
