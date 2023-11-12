@@ -1,7 +1,6 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/homePage.css';
+import './HomePage.css';
 import { Container } from 'react-bootstrap';
-import coverImage from '../assets/Healthy_Recipe1.png';
+import coverImage from '../../assets/Healthy_Recipe1.png';
 
 
 function homeContent()  {

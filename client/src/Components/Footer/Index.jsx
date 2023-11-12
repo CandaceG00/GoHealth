@@ -1,8 +1,7 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/footer.css';
+import './Footer.css';
 
 
-function footer()  {
+function Footer()  {
     return (
         <>
         <footer className="footer">
@@ -12,4 +11,4 @@ function footer()  {
     );
 }
 
-export default footer;
+export default Footer;

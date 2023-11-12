@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState } from 'react';
 import { Container, Card, Button } from 'react-bootstrap';
 import Eggs from '../assets/Eggs_breakfast.png';
