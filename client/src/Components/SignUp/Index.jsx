@@ -1,17 +1,15 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap'; // Import Row and Col
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import '../styles/login.css';
 
-function signUp() {
+function SignUp() {
   return (
     <>
       <Container className="header">
         <h1>
-          Login to <span className="title">GoHealth!</span>
+          Sign Up for <span className="title">GoHealth!</span>
         </h1>
       </Container>
 
@@ -76,4 +74,4 @@ function signUp() {
   );
 }
 
-export default signUp;
+export default SignUp;

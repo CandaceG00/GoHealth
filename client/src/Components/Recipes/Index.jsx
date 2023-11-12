@@ -1,13 +1,12 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState } from 'react';
 import { Container, Card, Button } from 'react-bootstrap';
-import Eggs from '../assets/Eggs_breakfast.png';
-import AvocadoToast from '../assets/avocado-toast.png';
-import Sandwich from '../assets/chicken_avocado.png';
-import SteakSandwich from '../assets/steak_salad.png';
-import FishTacos from '../assets/fish_tacos.png';
-import ChickenVeggies from '../assets/chicken_veggies.png';
-import '../styles/recipes.css';
+import Eggs from '../../assets/Eggs_breakfast.png';
+import AvocadoToast from '../../assets/avocado-toast.png';
+import Sandwich from '../../assets/chicken_avocado.png';
+import SteakSandwich from '../../assets/steak_salad.png';
+import FishTacos from '../../assets/fish_tacos.png';
+import ChickenVeggies from '../../assets/chicken_veggies.png';
+import './Recipes.css';
 
 function RecipeCard({ title, ingredients, onSave, onRemove, isSaved }) {
   const [expanded, setExpanded] = useState(false);

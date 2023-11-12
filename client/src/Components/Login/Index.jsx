@@ -1,8 +1,7 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap'; // Import Row and Col
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import '../styles/login.css';
+import './Login.css';
 
 function login() {
   return (

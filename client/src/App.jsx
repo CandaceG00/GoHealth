@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import HomeContent from './components/homePage';
-import Navbar from "./components/navbar";
-import About from "./components/about";
-import Footer from "./components/footer";
-import Recipes from "./components/recipes";
-import Login from "./components/login";
+import HomeContent from './Components/HomePage/Index';
+import Navbar from "./Components/Navbar/Index";
+import About from "./Components/About/Index";
+import Footer from "./Components/Footer/Index";
+import Recipes from "./Components/Recipes/Index";
+import Login from "./Components/Login/Index";
 
 function App() {
   const [currentTab, handleTabChange] = useState("GoHealth");
