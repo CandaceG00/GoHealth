@@ -34,4 +34,4 @@ const saveSchema = new mongoose.Schema(
   }
 );
 
-module.exports = saveSchemaSchema;
+module.exports = saveSchema;

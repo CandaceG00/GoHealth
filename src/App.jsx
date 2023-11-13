@@ -7,6 +7,16 @@ import About from "./components/about";
 import Footer from "./components/footer";
 import Recipes from "./components/recipes";
 import Login from "./components/login";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+} from '@apollo/client';
+
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+});
 
 function App() {
   const [currentTab, handleTabChange] = useState("GoHealth");
@@ -28,6 +38,7 @@ function App() {
   };
 
   return (
+    <ApolloProvider client={client}>
       <>
       <Helmet>
         <title>GoHealth - Recipes | {currentTab} </title>
@@ -39,6 +50,7 @@ function App() {
       <main>{renderTab()}</main>
       <Footer></Footer>
       </>
+    </ApolloProvider>
   );
 }
 
