@@ -1,17 +1,38 @@
 const typeDefs = `
     type User {
         _id: ID
-        username: String
         email: String
+        favorites: [Recipe]
     }
 
     type Auth {
-        token: ID!
+        token: String!
         user: User
+    }
+
+    type Recipe {
+        _id: ID
+        title: String
+        ingredients: [String!]
     }
 
     type Query {
         users: [User]
-        user(username: String!): User
+        user(email: String!): User
         me: User
-    }`
+        recipes: [Recipe]
+        favorites: [Recipe]
+    }
+    
+    type Mutation {
+        register(email: String!, password: String!): Auth
+
+        login(email: String!, password: String!): Auth
+
+        addToFavorites(recipeId: ID!): User
+
+        removeFromFavorites(recipeId: ID!): User
+    }
+`;
+
+module.exports = typeDefs;

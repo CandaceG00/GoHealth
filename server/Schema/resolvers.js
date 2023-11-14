@@ -1,78 +1,180 @@
-const { User } = require("../models/User");
-const {
-  signToken,
-  verifyToken,
-  AuthenticationError,
-} = require("../utils/auth");
+const { User, Recipe } = require('../models');
+const bcrypt = require('bcrypt');
+const { AuthenticationError, signToken } = require("../utils/auth");
+
 
 const resolvers = {
   Query: {
     users: async () => {
-      return await User.find()
-        .select("-__v -password")
-        .populate("bookmarkedNews");
-    },
-    user: async (parent, { username }) => {
-      return await User.findOne({ username })
-        .select("-__v -password")
-        .populate("bookmarkedNews");
-    },
-    me: async (parent, args, context) => {
-      if (context.user) {
-        return await User.findOne({ _id: context.user._id })
-          .select("-__v -password")
-          .populate("bookmarkedNews");
+      try {
+        const users = await User.find();
+        return users;
+      } catch (err) {
+        throw new Error(err);
       }
-      throw new AuthenticationError("You need to be logged in!");
+    },
+    user: async (_, { email }) => {
+      try {
+        const user = await User.findOne({ email });
+        return user;
+      } catch (err) {
+        throw new Error(err);
+      }
+    },
+    me: async(_, __, context) => {
+      if (!context.user) {
+        throw new AuthenticationError('You need to be logged in!');
+      }
+      return context.user;
+    },
+    recipes: async () => {
+      try {
+        const recipes = await Recipe.find();
+        return recipes;
+      } catch (err) {
+        throw new Error(err);
+      }
+    },
+    favorites: async (_, __, context) => {
+      try {
+        if (!context.user) {
+          throw new AuthenticationError('You need to be logged in!');
+        }
+
+        const user = await User.findById(context.user._id).populate('favorites')
+        if (!user) {
+          throw new AuthenticationError('User not found');
+        }
+
+        return user.favorites;
+      } catch (err) {
+        throw new Error(err);
+      }
     },
   },
 
   Mutation: {
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
-      const token = signToken(user);
-      return { token, user };
+    register: async (_, { email, password }) => {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const newUser = new User({ email, password: hashedPassword });
+      await newUser.save();
+      const token = signToken(newUser);
+      return { token, user: newUser };
     },
-    login: async (parent, { email, password }) => {
+
+    login: async (_, { email, password }) => {
       const user = await User.findOne({ email });
-
+      
       if (!user) {
-        throw AuthenticationError("Invalid email or password");
+        throw new AuthenticationError('User not found');
       }
 
-      const correctPassword = await user.checkPassword(password);
+      const passwordMatch = await bcrypt.compare(password, user.password);
 
-      if (!correctPassword) {
-        throw AuthenticationError("Invalid email or password");
+      if (!passwordMatch) {
+        throw new AuthenticationError('Incorrect password');
       }
 
       const token = signToken(user);
 
       return { token, user };
     },
-    saveNews: async (parent, { newsSaved }, context) => {
-      if (context.user) {
-        const updateUserNews = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { bookmarkedNews: newsSaved } },
-          { new: true, runValidators: true }
-        ).populate("bookmarkedNews");
 
-        return updateUserNews;
-      }
-      throw AuthenticationError;
-    },
-    removeNews: async (parent, { newsId }, context) => {
-      if (context.user) {
-        const removeNews = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { bookmarkedNews: { newsId } } },
+    addToFavorites: async (_, { recipeId }, context) => {
+      try {
+        console.log('Executing addToFavorites mutation');
+        
+        if (!context.user) {
+          console.warn('User not authenticated. Creating a new user without authentication.');
+    
+          // Check if there is a user with an empty favorites array
+          const existingUser = await User.findOne({ favorites: [] });
+    
+          if (existingUser) {
+            // If there is an existing user, add the recipe to their favorites
+            const updatedUser = await User.findByIdAndUpdate(
+              existingUser._id,
+              { $addToSet: { favorites: recipeId } },
+              { new: true }
+            ).populate('favorites');
+    
+            console.log('Updated user with existing favorites:', updatedUser);
+            return updatedUser;
+          }
+    
+          // If no existing user, create a new user with an empty favorites array
+          const newUser = new User({});
+          newUser.favorites.push(recipeId);
+          await newUser.save();
+    
+          console.log('Created a new user with favorites:', newUser);
+          return newUser;
+        }
+    
+        const user = await User.findByIdAndUpdate(
+          context.user._id,
+          { $addToSet: { favorites: recipeId } },
           { new: true }
-        ).populate("bookmarkedNews");
-
-        return removeNews;
+        ).populate('favorites');
+    
+        console.log('Updated user:', user);
+    
+        if (!user) {
+          console.error('User not found');
+          throw new Error('User not found');
+        }
+    
+        return user;
+      } catch (error) {
+        console.error('Error in addToFavorites mutation:', error);
+        throw error; // rethrow the error
       }
-      throw AuthenticationError;
+    },
+
+    removeFromFavorites: async (_, { recipeId }, context) => {
+      try {
+        console.log('Executing removeFromFavorites mutation');
+    
+        if (!context.user) {
+          console.warn('User not authenticated. Removing the recipe without authentication.');
+    
+          // Check if there is a user with the given recipe in their favorites
+          const existingUser = await User.findOne({ favorites: recipeId });
+    
+          if (existingUser) {
+            // If there is an existing user, remove the recipe from their favorites
+            const updatedUser = await User.findByIdAndUpdate(
+              existingUser._id,
+              { $pull: { favorites: recipeId } },
+              { new: true }
+            ).populate('favorites');
+    
+            console.log('Updated user with removed favorites:', updatedUser);
+            return updatedUser;
+          }
+    
+          console.error('Recipe not found in any user favorites');
+          throw new Error('Recipe not found in any user favorites');
+        }
+    
+        const user = await User.findByIdAndUpdate(
+          context.user._id,
+          { $pull: { favorites: recipeId } },
+          { new: true }
+        ).populate('favorites');
+    
+        console.log('Updated user:', user);
+    
+        if (!user) {
+          console.error('User not found');
+          throw new Error('User not found');
+        }
+    
+        return user;
+      } catch (error) {
+        console.error('Error in removeFromFavorites mutation:', error);
+        throw error; // rethrow the error
+      }
     },
   },
 };
