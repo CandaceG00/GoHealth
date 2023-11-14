@@ -15,7 +15,7 @@ import {
   GET_USER_FAVORITES,
 } from '../../utils/queries-mutations';
 
-function RecipeCard({ title, ingredients, onSave, onRemove, isSaved }) {
+function RecipeCard({ _id, title, ingredients, onSave, onRemove, isSaved }) {
   const [expanded, setExpanded] = useState(false);
 
   const toggleExpand = () => {
@@ -23,10 +23,13 @@ function RecipeCard({ title, ingredients, onSave, onRemove, isSaved }) {
   };
 
   const toggleSaved = () => {
+    console.log('Recipe ID in toggleSaved:', _id);
+    console.log('Recipe Title in toggleSaved:', title)
+    console.log('Recipe Ingredients in toggleSaved:', ingredients);
     if (isSaved) {
-      onRemove({ title, ingredients });
+      onRemove({ _id, title, ingredients });
     } else {
-      onSave({ title, ingredients });
+      onSave({ _id, title, ingredients });
     }
   };
 
@@ -96,9 +99,19 @@ function Recipes() {
 
   const saveRecipe = async (recipe) => {
     try {
+      console.log('Recipe ID:', recipe._id);
+      console.log('Recipe:', recipe); // Log the entire recipe object
+
+      // Check if recipe._id is valid before making mutation
+      if (!recipe._id) {
+        console.error('Recipe ID is missing or invalid.');
+        return;
+      }
+
       await addToFavorites({
         variables: { recipeId: recipe._id },
       });
+
       setSavedRecipes([...savedRecipes, recipe]);
     } catch (error) {
       console.error('Error saving recipe:', error);
@@ -144,8 +157,8 @@ function Recipes() {
         <RecipeCard
           title="Avocado On Toast"
           ingredients={["2 eggs", "1 bunch of asparagus", "1 onion", "2 tbsp chopped parsley"]}
-          onSave={saveRecipe}
-          onRemove={removeRecipe}
+          onSave={(recipe) => saveRecipe(recipe)}
+          onRemove={(recipe) => removeRecipe(recipe)}
           isSaved={savedRecipes.some((savedRecipe) => savedRecipe.title === "Avocado On Toast")}
         />
       </Container>

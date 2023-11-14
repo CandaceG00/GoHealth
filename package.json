@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "client": "vite ./client",
-    "server":"node ./Server/server.js",
+    "server": "node ./Server/server.js",
     "build": "vite build ./client",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
@@ -16,6 +16,7 @@
     "@apollo/server": "^4.9.5",
     "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.2",
+    "cors": "^2.8.5",
     "dayjs": "^1.11.10",
     "express": "^4.18.2",
     "graphql": "^16.8.1",

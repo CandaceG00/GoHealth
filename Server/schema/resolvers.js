@@ -41,7 +41,11 @@ const resolvers = {
           throw new AuthenticationError('You need to be logged in!');
         }
 
-        const user = await User.findById(context.user._id).populate('favorites')
+        const user = await User.findById(context.user._id).populate({
+          path: 'favorites',
+          select: 'title ingredients'
+        });
+
         if (!user) {
           throw new AuthenticationError('User not found');
         }
@@ -103,7 +107,7 @@ const resolvers = {
           }
     
           // If no existing user, create a new user with an empty favorites array
-          const newUser = new User({});
+          const newUser = new User({ email: 'uniqueuser@example.com', password: 'dummyPassword' });
           newUser.favorites.push(recipeId);
           await newUser.save();
     
@@ -111,20 +115,25 @@ const resolvers = {
           return newUser;
         }
     
-        const user = await User.findByIdAndUpdate(
-          context.user._id,
-          { $addToSet: { favorites: recipeId } },
-          { new: true }
-        ).populate('favorites');
-    
-        console.log('Updated user:', user);
-    
-        if (!user) {
-          console.error('User not found');
-          throw new Error('User not found');
-        }
-    
-        return user;
+        // Inside the addToFavorites mutation
+const user = await User.findByIdAndUpdate(
+  context.user._id,
+  { $addToSet: { favorites: recipeId } },
+  { new: true }
+).populate({
+  path: 'favorites',
+  select: '_id title ingredients', // Specify the fields you want to populate
+});
+
+console.log('Updated user:', user);
+
+if (!user) {
+  console.error('User not found');
+  throw new Error('User not found');
+}
+
+return user;
+
       } catch (error) {
         console.error('Error in addToFavorites mutation:', error);
         throw error; // rethrow the error
