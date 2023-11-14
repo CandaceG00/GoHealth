@@ -1,13 +1,19 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState } from 'react';
 import { Container, Card, Button } from 'react-bootstrap';
-import Eggs from '../assets/Eggs_breakfast.png';
-import AvocadoToast from '../assets/avocado-toast.png';
-import Sandwich from '../assets/chicken_avocado.png';
-import SteakSandwich from '../assets/steak_salad.png';
-import FishTacos from '../assets/fish_tacos.png';
-import ChickenVeggies from '../assets/chicken_veggies.png';
-import '../styles/recipes.css';
+import Eggs from '../../assets/Eggs_breakfast.png';
+import AvocadoToast from '../../assets/avocado-toast.png';
+import Sandwich from '../../assets/chicken_avocado.png';
+import SteakSandwich from '../../assets/steak_salad.png';
+import FishTacos from '../../assets/fish_tacos.png';
+import ChickenVeggies from '../../assets/chicken_veggies.png';
+import './Recipes.css';
+import { useMutation, useQuery } from '@apollo/client';
+import {
+  GET_RECIPES,
+  ADD_TO_FAVORITES,
+  REMOVE_FROM_FAVORITES,
+  GET_USER_FAVORITES,
+} from '../../utils/queries-mutations';
 
 function RecipeCard({ title, ingredients, onSave, onRemove, isSaved }) {
   const [expanded, setExpanded] = useState(false);
@@ -74,19 +80,49 @@ function RecipeCard({ title, ingredients, onSave, onRemove, isSaved }) {
 }
 
 function Recipes() {
+  const { loading, error, data } = useQuery(GET_RECIPES);
+
+  const [addToFavorites] = useMutation(ADD_TO_FAVORITES, {
+    refetchQueries: [{ query: GET_USER_FAVORITES }], 
+  });
+
+  const [removeFromFavorites] = useMutation(REMOVE_FROM_FAVORITES, {
+    refetchQueries: [{ query: GET_USER_FAVORITES }],
+  });
+
+
   const [savedRecipes, setSavedRecipes] = useState([]);
   const [displayFavorites, setDisplayFavorites] = useState(false);
 
-  const saveRecipe = (recipe) => {
-    setSavedRecipes([...savedRecipes, recipe]);
+  const saveRecipe = async (recipe) => {
+    try {
+      await addToFavorites({
+        variables: { recipeId: recipe._id },
+      });
+      setSavedRecipes([...savedRecipes, recipe]);
+    } catch (error) {
+      console.error('Error saving recipe:', error);
+    }
   };
 
-  const removeRecipe = (recipeToRemove) => {
-    const updatedRecipes = savedRecipes.filter(
-      (recipe) => recipe.title !== recipeToRemove.title
-    );
-    setSavedRecipes(updatedRecipes);
+  const removeRecipe = async (recipeToRemove) => {
+    try {
+      await removeFromFavorites({
+        variables: { recipeId: recipeToRemove._id },
+      });
+      const updatedRecipes = savedRecipes.filter(
+        (recipe) => recipe.title !== recipeToRemove.title
+      );
+      setSavedRecipes(updatedRecipes);
+    } catch (error) {
+      console.error('Error removing recipe:', error);
+    }
   };
+
+  if (loading) return <p>Loading....</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  const recipes = data.recipes;
 
   return (
     <>
@@ -103,14 +139,14 @@ function Recipes() {
           ingredients={["2 eggs", "1 bunch of asparagus", "1 onion", "2 tbsp chopped parsley"]}
           onSave={saveRecipe}
           onRemove={removeRecipe}
-          isSaved={savedRecipes.some((recipe) => recipe.title === "Eggs & Asparagus")}
+          isSaved={savedRecipes.some((savedRecipe) => savedRecipe.title === "Eggs & Asparagus")}
         />
         <RecipeCard
           title="Avocado On Toast"
           ingredients={["2 eggs", "1 bunch of asparagus", "1 onion", "2 tbsp chopped parsley"]}
           onSave={saveRecipe}
           onRemove={removeRecipe}
-          isSaved={savedRecipes.some((recipe) => recipe.title === "Avocado On Toast")}
+          isSaved={savedRecipes.some((savedRecipe) => savedRecipe.title === "Avocado On Toast")}
         />
       </Container>
 
@@ -123,14 +159,14 @@ function Recipes() {
           ingredients={["2 eggs", "1 bunch of asparagus", "1 onion", "2 tbsp chopped parsley"]}
           onSave={saveRecipe}
           onRemove={removeRecipe}
-          isSaved={savedRecipes.some((recipe) => recipe.title === "Chicken & Avocado Sandwich")}
+          isSaved={savedRecipes.some((savedRecipe) => savedRecipe.title === "Chicken & Avocado Sandwich")}
         />
         <RecipeCard
           title="Steak Salad"
           ingredients={["2 eggs", "1 bunch of asparagus", "1 onion", "2 tbsp chopped parsley"]}
           onSave={saveRecipe}
           onRemove={removeRecipe}
-          isSaved={savedRecipes.some((recipe) => recipe.title === "Steak Salad")}
+          isSaved={savedRecipes.some((savedRecipe) => savedRecipe.title === "Steak Salad")}
         />
       </Container>
 
@@ -144,14 +180,14 @@ function Recipes() {
           ingredients={["2 eggs", "1 bunch of asparagus", "1 onion", "2 tbsp chopped parsley"]}
           onSave={saveRecipe}
           onRemove={removeRecipe}
-          isSaved={savedRecipes.some((recipe) => recipe.title === "Healthy Fish Tacos")}
+          isSaved={savedRecipes.some((savedRecipe) => savedRecipe.title === "Healthy Fish Tacos")}
         />
         <RecipeCard
           title="Chicken & Veggies"
           ingredients={["2 eggs", "1 bunch of asparagus", "1 onion", "2 tbsp chopped parsley"]}
           onSave={saveRecipe}
           onRemove={removeRecipe}
-          isSaved={savedRecipes.some((recipe) => recipe.title === "Chicken & Veggies")}
+          isSaved={savedRecipes.some((savedRecipe) => savedRecipe.title === "Chicken & Veggies")}
         />
       </Container>
       

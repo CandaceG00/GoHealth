@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { Helmet } from 'react-helmet';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomeContent from './components/homePage';
@@ -7,14 +8,9 @@ import About from "./components/about";
 import Footer from "./components/footer";
 import Recipes from "./components/recipes";
 import Login from "./components/login";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-} from '@apollo/client';
-
 
 const client = new ApolloClient({
+  uri: 'http://localhost:3001/graphql',
   cache: new InMemoryCache(),
 });
 
@@ -48,7 +44,7 @@ function App() {
         handleTabChange={handleTabChange}
       ></Navbar>
       <main>{renderTab()}</main>
-      <Footer></Footer>
+      <Footer />
       </>
     </ApolloProvider>
   );

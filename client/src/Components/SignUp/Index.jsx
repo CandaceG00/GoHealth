@@ -1,24 +1,46 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap'; // Import Row and Col
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import '../styles/login.css';
+import { useMutation } from '@apollo/client';
+import { REGISTER_USER } from '../../utils/queries-mutations';
 
-function signUp() {
+
+function SignUp() {
+  const [registerUser, { loading, error }] = useMutation(REGISTER_USER);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    // Get form values
+    const email = event.target.elements.email.value;
+    const password = event.target.elements.email.password.value;
+
+    try {
+      // Call the mutation
+      const { data } = await registerUser({
+        variables: { email, password },
+      });
+
+      // Handle the response as needed
+      console.log('Registration successful!', data);
+    } catch (error) {
+      // Handle the error
+      console.error('Registration failed!', error.message);
+    }
+  };
+
   return (
     <>
       <Container className="header">
         <h1>
-          Login to <span className="title">GoHealth!</span>
+          Sign Up for <span className="title">GoHealth!</span>
         </h1>
       </Container>
 
       <br />
 
       <Container className="signup-form">
-      <Form>
+      <Form onSubmit={handleSubmit}>
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formGridEmail">
           <Form.Label>Email</Form.Label>
@@ -76,4 +98,4 @@ function signUp() {
   );
 }
 
-export default signUp;
+export default SignUp;
