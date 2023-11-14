@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { Helmet } from 'react-helmet';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import HomeContent from './Components/HomePage/Index';
-import Navbar from "./Components/Navbar/Index";
-import About from "./Components/About/Index";
-import Footer from "./Components/Footer/Index";
-import Recipes from "./Components/Recipes/Index";
-import Login from "./Components/Login/Index";
+import HomeContent from './components/homePage';
+import Navbar from "./components/navbar";
+import About from "./components/about";
+import Footer from "./components/footer";
+import Recipes from "./components/recipes";
+import Login from "./components/login";
+
+const client = new ApolloClient({
+  uri: 'http://localhost:3001/graphql',
+  cache: new InMemoryCache(),
+});
 
 function App() {
   const [currentTab, handleTabChange] = useState("GoHealth");
@@ -28,6 +34,7 @@ function App() {
   };
 
   return (
+    <ApolloProvider client={client}>
       <>
       <Helmet>
         <title>GoHealth - Recipes | {currentTab} </title>
@@ -37,8 +44,9 @@ function App() {
         handleTabChange={handleTabChange}
       ></Navbar>
       <main>{renderTab()}</main>
-      <Footer></Footer>
+      <Footer />
       </>
+    </ApolloProvider>
   );
 }
 
