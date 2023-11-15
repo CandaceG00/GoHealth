@@ -45,10 +45,11 @@ const resolvers = {
     },
     favorites: async (_, __, context) => {
       try {
+        /*
         if (!context.user) {
           throw new AuthenticationError('You need to be logged in!');
         }
-
+        */
         const user = await User.findById(context.user._id).populate({
           path: 'favorites',
           select: 'title ingredients'
