@@ -1,6 +1,6 @@
 # GoHealth
 # Project Three – Group Five
-# By: 
+# Created By: 
 - Cody Deering
 - Candace Gostinski
 - Daniel Moretz
@@ -27,5 +27,5 @@ GoHealth is designed to be used by customers searching for healthier alternative
 ![Screenshot shots](./client/src/Assets/recipesPage.png)
 ![Screenshot shots](./client/src/Assets/login.png)
 ## Links
-### [Link to GitHub repo](https://github.com/elcaine/FindIt)
-### [Link to deployed Heroku app](https://find-it-p2-c5abd3d95f03.herokuapp.com/)
+### [Link to GitHub repo](https://github.com/CandaceG00/GoHealth)
+### [Link to deployed Heroku app](https://gohealth-78e1998b3c54.herokuapp.com/)
