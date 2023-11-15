@@ -208,14 +208,14 @@ function Recipes() {
       <Container className="breakfast-container" style={{ display: 'flex', gap: '20px' }}>
         <RecipeCard
           title="Healthy Fish Tacos"
-          ingredients={["2 eggs", "1 bunch of asparagus", "1 onion", "2 tbsp chopped parsley"]}
+          ingredients={["1 package fishless filets", "1 medium tomato", "3 tbsp red onion", "1/4 cup cilantro", "1 jalapeno", "2 limes", "Sea salt", "Freshly ground black pepper", "1/2 cup vegan mayonnaise", "2 tbsp adobo sauce", "1 cup shredded green cabbage", "1 cup shredded red cabbage", "8 six inch corn tortillas"]}
           onSave={saveRecipe}
           onRemove={removeRecipe}
           isSaved={savedRecipes.some((savedRecipe) => savedRecipe.title === "Healthy Fish Tacos")}
         />
         <RecipeCard
           title="Chicken & Veggies"
-          ingredients={["2 eggs", "1 bunch of asparagus", "1 onion", "2 tbsp chopped parsley"]}
+          ingredients={["1 whole chicken", "Kosher salt", "Fresh ground pepper", "6 small carrots", "3 shallots", "1 1/2 lbs fingerling potatoes", "1 lemon", "3 tbsp extra-virgin olive oil", "1/4 cup fresh parsley leaves"]}
           onSave={saveRecipe}
           onRemove={removeRecipe}
           isSaved={savedRecipes.some((savedRecipe) => savedRecipe.title === "Chicken & Veggies")}
