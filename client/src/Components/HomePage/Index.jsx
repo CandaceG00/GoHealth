@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import coverImage from '../../assets/Healthy_Recipe1.png';
 
 
-function homeContent()  {
+function HomePage()  {
     return (
         <>
         <Container className="header">
@@ -24,4 +24,4 @@ function homeContent()  {
 }
 
 
-export default homeContent;
+export default HomePage;
