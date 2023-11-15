@@ -167,14 +167,20 @@ function Recipes() {
       <Container className="breakfast-container" style={{ display: 'flex', gap: '20px' }}>
         <RecipeCard
           title="Eggs & Asparagus"
-          ingredients={["2 eggs", "1 bunch of asparagus", "1 onion", "2 tbsp chopped parsley"]}
+          ingredients={["2 eggs", "1 bunch of asparagus", "1 onion", "2 tbsp chopped parsley",
+        "Preheat the broiler on high. Put the butter in a large cast iron or other ovenproof skillet, and put the skillet under the broiler for a couple of minutes, until the butter is melted.",
+        "Add the asparagus, onion, garlic, and red pepper flakes to the skillet and stir. Return the pan to the broiler for about five minutes, until the asparagus is somewhat tender but not fully cooked.",
+        "Use a spoon to make four wells in the asparagus mixture for the eggs. Carefully crack one egg into each well. Broil for 2-5 more minutes, checking frequently, until the whites are cooked through but the yolks are still runny (or until cooked to your liking).",
+        "Remove the skillet from broiler and top with lemon juice, salt, and pepper. Serve directly from the skillet or transferred to individual plates. This is especially delicious accompanied by some crusty bread or toast!"]}
           onSave={saveRecipe}
           onRemove={removeRecipe}
           isSaved={savedRecipes.some((savedRecipe) => savedRecipe.title === "Eggs & Asparagus")}
         />
         <RecipeCard
           title="Avocado On Toast"
-          ingredients={["1 ripe avocado", "1 slice multigrain bread", "Pinch of salt", "Pinch of pepper"]}
+          ingredients={["1 ripe avocado", "1 slice multigrain bread", "Pinch of salt", "Pinch of pepper",
+          "Halve the avocado vertically and remove the pit. Use a small knife to dice the avocado flesh while it's still inside the skin. Season the flesh with a squeeze of lemon juice and sprinkle it with sea salt.",
+          "Scoop the diced avocado flesh out of the skin and onto the toasted bread. Mash the avocado with the back of a fork and top with your desired toppings."]}
           onSave={(recipe) => saveRecipe(recipe)}
           onRemove={(recipe) => removeRecipe(recipe)}
           isSaved={savedRecipes.some((savedRecipe) => savedRecipe.title === "Avocado On Toast")}
