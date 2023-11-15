@@ -174,7 +174,7 @@ function Recipes() {
         />
         <RecipeCard
           title="Avocado On Toast"
-          ingredients={["2 eggs", "1 bunch of asparagus", "1 onion", "2 tbsp chopped parsley"]}
+          ingredients={["1 ripe avocado", "1 slice multigrain bread", "Pinch of salt", "Pinch of pepper"]}
           onSave={(recipe) => saveRecipe(recipe)}
           onRemove={(recipe) => removeRecipe(recipe)}
           isSaved={savedRecipes.some((savedRecipe) => savedRecipe.title === "Avocado On Toast")}
