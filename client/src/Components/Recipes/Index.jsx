@@ -111,7 +111,7 @@ function Recipes() {
     refetchQueries: [{ query: GET_USER_FAVORITES }],
   });
 */
-  const [savedRecipes, setSavedRecipes] = useState(getSavedRecipesFromLocalStorage);
+  const [savedRecipes, setSavedRecipes] = useState(getSavedRecipesFromLocalStorage());
   const [displayFavorites, setDisplayFavorites] = useState(false);
 
   const saveRecipe = (recipe) => {
