@@ -34,8 +34,8 @@ export const GET_USER_FAVORITES = gql`
 `;
 
 export const ADD_TO_FAVORITES = gql`
-  mutation addToFavorites($recipeId: ID!) {
-    addToFavorites(recipeId: $recipeId) {
+  mutation addToFavorites($recipeTitle: String!) {
+    addToFavorites(recipeTitle: $recipeTitle) {
       _id
       email
       favorites {
@@ -48,8 +48,8 @@ export const ADD_TO_FAVORITES = gql`
 `;
 
 export const REMOVE_FROM_FAVORITES = gql`
-  mutation removeFromFavorites($recipeId: ID!) {
-    removeFromFavorites(recipeId: $recipeId) {
+  mutation removeFromFavorites($recipeTitle: String!) {
+    removeFromFavorites(recipeTitle: $recipeTitle) {
       _id
       email
       favorites {
