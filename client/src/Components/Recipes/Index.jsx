@@ -174,7 +174,7 @@ function Recipes() {
         />
         <RecipeCard
           title="Avocado On Toast"
-          ingredients={["2 eggs", "1 bunch of asparagus", "1 onion", "2 tbsp chopped parsley"]}
+          ingredients={["1 ripe avocado", "1 slice multigrain bread", "Pinch of salt", "Pinch of pepper"]}
           onSave={(recipe) => saveRecipe(recipe)}
           onRemove={(recipe) => removeRecipe(recipe)}
           isSaved={savedRecipes.some((savedRecipe) => savedRecipe.title === "Avocado On Toast")}
@@ -187,14 +187,14 @@ function Recipes() {
       <Container className="breakfast-container" style={{ display: 'flex', gap: '20px' }}>
         <RecipeCard
           title="Chicken & Avocado Sandwich"
-          ingredients={["2 eggs", "1 bunch of asparagus", "1 onion", "2 tbsp chopped parsley"]}
+          ingredients={["1 vegan chicken scallopini", "1 vegan sandwich roll", "1 slice vegan cheese", "2 tsp Dijon mustard", "2 tsp vegan mayo", "Pinch of smoky paprika", "2 romaine/green leaf lettuce leaves", "2 slices onion", "1 tsp extra virgin olive oil", "1/2 avocado, sliced"]}
           onSave={saveRecipe}
           onRemove={removeRecipe}
           isSaved={savedRecipes.some((savedRecipe) => savedRecipe.title === "Chicken & Avocado Sandwich")}
         />
         <RecipeCard
           title="Steak Salad"
-          ingredients={["2 eggs", "1 bunch of asparagus", "1 onion", "2 tbsp chopped parsley"]}
+          ingredients={["1.33 lb. New York Strip Steak", "2 tbsp Worcestershire sauce", "1 tbsp balsamic vinegar", "1/2 tbsp minced garlic", "1 tbsp olive oil", "1 tbsp lemon juice", "1/4 tsp lemon pepper", "7 oz. romaine lettuce", "1 large avocado", "4 English cucumbers", "10 oz. cherry tomatoes", "1/2 red onion", "1 cup corn", "1/4 cup sunflower seeds", "2 oz. goat cheese crumbles"]}
           onSave={saveRecipe}
           onRemove={removeRecipe}
           isSaved={savedRecipes.some((savedRecipe) => savedRecipe.title === "Steak Salad")}
@@ -208,14 +208,14 @@ function Recipes() {
       <Container className="breakfast-container" style={{ display: 'flex', gap: '20px' }}>
         <RecipeCard
           title="Healthy Fish Tacos"
-          ingredients={["2 eggs", "1 bunch of asparagus", "1 onion", "2 tbsp chopped parsley"]}
+          ingredients={["1 package fishless filets", "1 medium tomato", "3 tbsp red onion", "1/4 cup cilantro", "1 jalapeno", "2 limes", "Sea salt", "Freshly ground black pepper", "1/2 cup vegan mayonnaise", "2 tbsp adobo sauce", "1 cup shredded green cabbage", "1 cup shredded red cabbage", "8 six inch corn tortillas"]}
           onSave={saveRecipe}
           onRemove={removeRecipe}
           isSaved={savedRecipes.some((savedRecipe) => savedRecipe.title === "Healthy Fish Tacos")}
         />
         <RecipeCard
           title="Chicken & Veggies"
-          ingredients={["2 eggs", "1 bunch of asparagus", "1 onion", "2 tbsp chopped parsley"]}
+          ingredients={["1 whole chicken", "Kosher salt", "Fresh ground pepper", "6 small carrots", "3 shallots", "1 1/2 lbs fingerling potatoes", "1 lemon", "3 tbsp extra-virgin olive oil", "1/4 cup fresh parsley leaves"]}
           onSave={saveRecipe}
           onRemove={removeRecipe}
           isSaved={savedRecipes.some((savedRecipe) => savedRecipe.title === "Chicken & Veggies")}
