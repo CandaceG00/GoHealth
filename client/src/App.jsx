@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { Helmet } from 'react-helmet';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import HomeContent from './components/homePage';
+import HomePage from './components/homePage';
 import Navbar from "./components/navbar";
 import About from "./components/about";
 import Footer from "./components/footer";
@@ -19,7 +19,7 @@ function App() {
 
   const renderTab = () => {
     if (currentTab === "GoHealth") {
-      return <HomeContent />;
+      return <HomePage />;
     }
     if (currentTab === "About") {
       return <About />;
@@ -30,7 +30,7 @@ function App() {
     if (currentTab === "Login") {
       return <Login />;
     }
-    return <HomeContent />;
+    return <HomePage />;
   };
 
   return (
