@@ -8,12 +8,19 @@ import FishTacos from '../../assets/fish_tacos.png';
 import ChickenVeggies from '../../assets/chicken_veggies.png';
 import './Recipes.css';
 import { useMutation, useQuery } from '@apollo/client';
-import {
+/*import {
   GET_RECIPES,
   ADD_TO_FAVORITES,
   REMOVE_FROM_FAVORITES,
   GET_USER_FAVORITES,
 } from '../../utils/queries-mutations';
+*/
+
+// Utility function to manage local storage
+const getSavedRecipesFromLocalStorage = () => {
+  const savedRecipes = JSON.parse(localStorage.getItem('savedRecipes')) || [];
+  return savedRecipes;
+};
 
 function RecipeCard({ title, ingredients, onSave, onRemove, isSaved }) {
   const [expanded, setExpanded] = useState(false);
@@ -21,8 +28,21 @@ function RecipeCard({ title, ingredients, onSave, onRemove, isSaved }) {
   const toggleExpand = () => {
     setExpanded(!expanded);
   };
-
+  
+  /*const toggleSaved = () => {
+    console.log('Recipe ID in toggleSaved:', _id);
+    console.log('Recipe Title in toggleSaved:', title)
+    console.log('Recipe Ingredients in toggleSaved:', ingredients);
+    if (isSaved) {
+      onRemove({ title, ingredients });
+    } else {
+      onSave({ title, ingredients });
+    }
+  };
+*/
   const toggleSaved = () => {
+    console.log('Recipe Title in toggleSaved:', title)
+    console.log('Recipe Ingredients in toggleSaved:', ingredients);
     if (isSaved) {
       onRemove({ title, ingredients });
     } else {
@@ -80,6 +100,7 @@ function RecipeCard({ title, ingredients, onSave, onRemove, isSaved }) {
 }
 
 function Recipes() {
+  /*
   const { loading, error, data } = useQuery(GET_RECIPES);
 
   const [addToFavorites] = useMutation(ADD_TO_FAVORITES, {
@@ -89,40 +110,50 @@ function Recipes() {
   const [removeFromFavorites] = useMutation(REMOVE_FROM_FAVORITES, {
     refetchQueries: [{ query: GET_USER_FAVORITES }],
   });
-
-
-  const [savedRecipes, setSavedRecipes] = useState([]);
+*/
+  const [savedRecipes, setSavedRecipes] = useState(getSavedRecipesFromLocalStorage);
   const [displayFavorites, setDisplayFavorites] = useState(false);
 
-  const saveRecipe = async (recipe) => {
+  const saveRecipe = (recipe) => {
     try {
-      await addToFavorites({
-        variables: { recipeId: recipe._id },
-      });
-      setSavedRecipes([...savedRecipes, recipe]);
+      console.log('Recipe Title:', recipe.title);
+      console.log('Recipe:', recipe); // Log the entire recipe object
+
+      // Check if recipe._id is valid before making mutation
+      if (!recipe.title) {
+        console.error('Recipe title is missing or invalid.');
+        return;
+      }
+
+      const updatedRecipes = [...savedRecipes, recipe];
+      setSavedRecipes(updatedRecipes);
+
+      // Update local storage on save
+      localStorage.setItem('savedRecipes', JSON.stringify(updatedRecipes));
     } catch (error) {
       console.error('Error saving recipe:', error);
     }
   };
 
-  const removeRecipe = async (recipeToRemove) => {
+  const removeRecipe = (recipeToRemove) => {
     try {
-      await removeFromFavorites({
-        variables: { recipeId: recipeToRemove._id },
-      });
+      console.log('Removing Recipe:', recipeToRemove);
+      
       const updatedRecipes = savedRecipes.filter(
         (recipe) => recipe.title !== recipeToRemove.title
       );
       setSavedRecipes(updatedRecipes);
+
+      // Update local storage on remove
+      localStorage.setItem('savedRecipes', JSON.stringify(updatedRecipes));
     } catch (error) {
       console.error('Error removing recipe:', error);
     }
   };
 
-  if (loading) return <p>Loading....</p>;
-  if (error) return <p>Error: {error.message}</p>;
-
-  const recipes = data.recipes;
+  const toggleDisplayFavorites = () => {
+    setDisplayFavorites(!displayFavorites);
+  };
 
   return (
     <>
@@ -144,8 +175,8 @@ function Recipes() {
         <RecipeCard
           title="Avocado On Toast"
           ingredients={["2 eggs", "1 bunch of asparagus", "1 onion", "2 tbsp chopped parsley"]}
-          onSave={saveRecipe}
-          onRemove={removeRecipe}
+          onSave={(recipe) => saveRecipe(recipe)}
+          onRemove={(recipe) => removeRecipe(recipe)}
           isSaved={savedRecipes.some((savedRecipe) => savedRecipe.title === "Avocado On Toast")}
         />
       </Container>
@@ -212,7 +243,7 @@ function Recipes() {
       <Container className="show-favorites-button">
         {savedRecipes.length > 0 && (
           <Button
-            onClick={() => setDisplayFavorites(!displayFavorites)}
+            onClick={toggleDisplayFavorites}
             variant="primary"
             className="show-hide-button"
           >

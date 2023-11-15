@@ -29,9 +29,9 @@ const typeDefs = `
 
         login(email: String!, password: String!): Auth
 
-        addToFavorites(recipeId: ID!): User
+        addToFavorites(recipeTitle: String!): User
 
-        removeFromFavorites(recipeId: ID!): User
+        removeFromFavorites(recipeTitle: String!): User
     }
 `;
 
