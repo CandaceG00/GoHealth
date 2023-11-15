@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { Helmet } from 'react-helmet';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import HomePage from './components/homePage';
-import Navbar from "./components/navbar";
-import About from "./components/about";
-import Footer from "./components/footer";
-import Recipes from "./components/recipes";
-import Login from "./components/login";
+import HomePage from "./Components/HomePage";
+import Navbar from "./Components/Navbar";
+import About from "./Components/About";
+import Footer from "./Components/Footer";
+import Recipes from "./Components/Recipes";
+import Login from "./Components/Login";
 
 const client = new ApolloClient({
   uri: 'http://localhost:3001/graphql',
