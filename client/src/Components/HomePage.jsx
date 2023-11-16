@@ -1,6 +1,6 @@
 
 import { Container } from 'react-bootstrap';
-import coverImage from '../../assets/Healthy_Recipe1.png';
+import coverImage from '../../Assets/Healthy_Recipe1.png';
 import { Link } from 'react-router-dom';
 
 

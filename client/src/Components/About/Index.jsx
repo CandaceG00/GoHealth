@@ -1,5 +1,5 @@
 import { Container } from 'react-bootstrap';
-import AboutImage from '../../assets/about_image.png';
+import AboutImage from '../../Assets/about_image.png';
 import { Link } from 'react-router-dom';
 import './About.css';
 
