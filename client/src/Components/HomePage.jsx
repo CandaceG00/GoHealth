@@ -1,4 +1,4 @@
-import './HomePage.css';
+
 import { Container } from 'react-bootstrap';
 import coverImage from '../../assets/Healthy_Recipe1.png';
 import { Link } from 'react-router-dom';
