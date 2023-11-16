@@ -2,6 +2,9 @@
   "name": "gohealth",
   "private": true,
   "version": "0.0.0",
+  "engines": {
+    "node": "20.7.0"
+  },
   "scripts": {
     "client": "vite ./client",
     "server": "node ./Server/server.js",
