@@ -20,7 +20,7 @@ GraphQL
 Concurrently
 
 ## Usage
-GoHealth is designed to be used by customers searching for healthier alternative options for their food intake. They can find a list of ingredients and directions for each recipe by visiting our recipe page.
+GoHealth is designed to be used by customers searching for healthier alternative options for their food intake. They can find a list of ingredients and directions for each recipe by visiting our recipe page. 
 
 ### Screenshots of GoHealth application 
 ![Screenshot shots](./client/src/Assets/homePage.png)
