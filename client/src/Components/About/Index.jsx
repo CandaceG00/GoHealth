@@ -1,5 +1,6 @@
 import { Container } from 'react-bootstrap';
 import AboutImage from '../../assets/about_image.png';
+import { Link } from 'react-router-dom';
 import './About.css';
 
 function About()  {
@@ -18,7 +19,7 @@ function About()  {
                 or dinner - no matter the time of day, GoHealth has the recipes
                 for you. Check out our collection of recipes today!
                 </h5>
-            <button className="about-button">Find Recipes</button>
+            <Link className="about-button" to="/recipes">Find Recipes</Link>
                 </Container>
 
        
