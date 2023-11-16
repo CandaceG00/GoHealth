@@ -18,8 +18,8 @@ function SignUp() {
     // Simulate successful registration
     console.log('Simulated successful registration for:', email);
 
-    // Redirect to the homepage
-    window.location.href = '/';
+    // Redirect to the Recipes page
+    navigate('/recipes');
   };
 
 
