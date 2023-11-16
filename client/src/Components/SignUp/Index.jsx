@@ -88,7 +88,7 @@ function SignUp() {
       </Form.Group>
 
       <Button variant="primary" type="submit">
-        Submit
+        Sign Up
       </Button>
     </Form>
       </Container>

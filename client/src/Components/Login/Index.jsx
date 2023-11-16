@@ -71,9 +71,7 @@ function login() {
               <Button className="login" variant="primary" type="submit">
                 Login
               </Button>
-              <Button className="signup ml-2" variant="primary" type="submit">
-                Sign up
-              </Button>
+
             </Form>
           </Col>
         </Row>
