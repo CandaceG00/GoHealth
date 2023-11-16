@@ -3,31 +3,25 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useMutation } from '@apollo/client';
 import { REGISTER_USER } from '../../utils/queries-mutations';
-
+import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
-  const [registerUser, { loading, error }] = useMutation(REGISTER_USER);
-
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     // Get form values
-    const email = event.target.elements.email.value;
-    const password = event.target.elements.email.password.value;
+    const email = event.target.elements.formGridEmail.value;
+    const password = event.target.elements.formGridPassword.value;
 
-    try {
-      // Call the mutation
-      const { data } = await registerUser({
-        variables: { email, password },
-      });
+    // Simulate successful registration
+    // For a real application, you would make an API call to the server here
+    // and handle the response accordingly
+    console.log('Simulated successful registration for:', email);
 
-      // Handle the response as needed
-      console.log('Registration successful!', data);
-    } catch (error) {
-      // Handle the error
-      console.error('Registration failed!', error.message);
-    }
+    // Redirect to the homepage
+    window.location.href = '/';
   };
+
 
   return (
     <>
