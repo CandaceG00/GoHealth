@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { Helmet } from 'react-helmet';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import HomePage from "./Components/HomePage/index.jsx";
+import HomePage from "./Components/HomePage/Index.jsx";
 import Navbar from "./Components/Navbar/Index.jsx";
 import About from "./Components/About/Index.jsx";
 import Footer from "./Components/Footer/Index.jsx";
