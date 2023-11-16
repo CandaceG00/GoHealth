@@ -6,6 +6,8 @@ import { REGISTER_USER } from '../../utils/queries-mutations';
 import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
+  const navigate = useNavigate();  // Initialize useNavigate
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -14,12 +16,10 @@ function SignUp() {
     const password = event.target.elements.formGridPassword.value;
 
     // Simulate successful registration
-    // For a real application, you would make an API call to the server here
-    // and handle the response accordingly
     console.log('Simulated successful registration for:', email);
 
-    // Redirect to the homepage
-    window.location.href = '/';
+    // Redirect to the Recipes page
+    navigate('/recipes');
   };
 
 
