@@ -18,8 +18,8 @@ function SignUp() {
     // Simulate successful registration
     console.log('Simulated successful registration for:', email);
 
-    // Redirect to the Recipes page
-    navigate('/recipes');
+    // Redirect to the homepage
+    window.location.href = '/';
   };
 
 
@@ -67,7 +67,9 @@ function SignUp() {
           <Form.Label>State</Form.Label>
           <Form.Select defaultValue="Choose...">
             <option>Choose...</option>
-            <option>...</option>
+            <option>North Carolina</option>
+            <option>New York</option>
+            <option>Florida</option>
           </Form.Select>
         </Form.Group>
 
