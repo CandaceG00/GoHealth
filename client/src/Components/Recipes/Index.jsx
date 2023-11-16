@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Container, Card, Button } from 'react-bootstrap';
-import Eggs from '../../assets/Eggs_breakfast.png';
-import AvocadoToast from '../../assets/avocado-toast.png';
-import Sandwich from '../../assets/chicken_avocado.png';
-import SteakSandwich from '../../assets/steak_salad.png';
-import FishTacos from '../../assets/fish_tacos.png';
-import ChickenVeggies from '../../assets/chicken_veggies.png';
+import Eggs from '../../Assets/Eggs_breakfast.png';
+import AvocadoToast from '../../Assets/avocado-toast.png';
+import Sandwich from '../../Assets/chicken_avocado.png';
+import SteakSandwich from '../../Assets/steak_salad.png';
+import FishTacos from '../../Assets/fish_tacos.png';
+import ChickenVeggies from '../../Assets/chicken_veggies.png';
 import './Recipes.css';
 import { useMutation, useQuery } from '@apollo/client';
 /*import {
